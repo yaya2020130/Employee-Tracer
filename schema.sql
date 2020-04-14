@@ -1,5 +1,3 @@
-
-
 DROP DATABASE IF EXISTS system_DB;
 CREATE DATABASE system_DB;
 USE  system_DB;
@@ -21,18 +19,14 @@ CREATE TABLE roles
 );
 
 CREATE TABLE employee(
-  id INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  id INT UNSIGNED PRIMARY KEY NOT NULL AUTO_INCREMENT ,
 firstname VARCHAR(50) NOT NULL,
 lastname varchar (30) NOT NULL,
- manager_id int UNSIGNED,
- INDEX man_id (manager_id),
  roleid int UNSIGNED NOT NULL,
 INDEX role_id(roleid),
- CONSTRAINT fk_role foreign key (roleid) references roles(id) ON DELETE CASCADE,
- CONSTRAINT fk_man foreign key (manager_id) references employee(id) ON DELETE SET NULL,
- PRIMARY KEY (id)
-
+ CONSTRAINT fk_role foreign key (roleid) references roles(id) ON DELETE CASCADE,  
+ manager_id int UNSIGNED DEFAULT NULL,
+ INDEX man_id (manager_id),
+ CONSTRAINT fk_man foreign key (manager_id) references employee(id) ON DELETE SET NULL
 )
 ;
-
-   
